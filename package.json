@@ -1,0 +1,19 @@
+{
+  "name": "brain-agriculture-backend",
+  "version": "1.0.0",
+  "description": "O teste tem como objetivo acurar as habilidades do candidato em resolver alguns problemas relacionados à lógica de programação, regra de negócio e orientação à objetos.",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "start:dev": "tsx watch src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.9.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
