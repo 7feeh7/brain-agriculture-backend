@@ -85,4 +85,15 @@ export class PostgresFarmsRepository implements IFarmsRepository {
             .sum("total_area as total");
         return Number(result[0].total);
     }
+
+    async getFarmsByStateByProducerId(producerId: string): Promise<{
+        state: string;
+        total: number
+    }[]> {
+        return await this.db("farms")
+            .where({ producer_id: producerId })
+            .select("state")
+            .count("id as total")
+            .groupBy("state");
+    }
 }
