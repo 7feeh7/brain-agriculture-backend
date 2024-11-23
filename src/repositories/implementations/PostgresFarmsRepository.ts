@@ -71,4 +71,11 @@ export class PostgresFarmsRepository implements IFarmsRepository {
             ...(farm.crops && { crops: farm.crops }),
         });
     }
+
+    async getTotalFarmsByProducerId(producerId: string): Promise<number> {
+        const result = await this.db("farms")
+            .where({ producer_id: producerId })
+            .count("id as total");
+        return Number(result[0].total);
+    }
 }
