@@ -5,4 +5,5 @@ export interface IFarmsRepository {
     findById(id: string): Promise<Farm | null>;
     update(id: string, farm: Partial<Farm>): Promise<void>;
     getTotalFarmsByProducerId(producerId: string): Promise<number>;
+    getTotalAreaByProducerId(producerId: string): Promise<number>;
 }
