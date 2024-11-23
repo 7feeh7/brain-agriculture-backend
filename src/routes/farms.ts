@@ -5,11 +5,11 @@ import { updateFarmController } from "../useCases/UpdateFarm";
 const farmsRouter = Router();
 
 farmsRouter.post("/", (request: Request, response: Response) => {
-    return createFarmController.handle(request, response);
+    createFarmController.handle(request, response);
 });
 
 farmsRouter.patch("/:id", (request: Request, response: Response) => {
-    return updateFarmController.handle(request, response);
+    updateFarmController.handle(request, response);
 });
 
 export { farmsRouter };

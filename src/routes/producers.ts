@@ -8,23 +8,23 @@ import { deleteProducerController } from "../useCases/DeleteProducer";
 const producersRouter = Router();
 
 producersRouter.post("/", (request: Request, response: Response) => {
-    return createProducerController.handle(request, response);
+    createProducerController.handle(request, response);
 });
 
 producersRouter.get("/:id", (request: Request, response: Response) => {
-    return getProducerByIdController.handle(request, response);
+    getProducerByIdController.handle(request, response);
 });
 
 producersRouter.get("/", (request: Request, response: Response) => {
-    return getProducersController.handle(request, response);
+    getProducersController.handle(request, response);
 });
 
 producersRouter.patch("/:id", (request: Request, response: Response) => {
-    return updateProducerController.handle(request, response);
+    updateProducerController.handle(request, response);
 });
 
 producersRouter.delete("/:id", (request: Request, response: Response) => {
-    return deleteProducerController.handle(request, response);
+    deleteProducerController.handle(request, response);
 });
 
 export { producersRouter };
