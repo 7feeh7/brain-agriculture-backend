@@ -39,4 +39,33 @@ export class PostgresFarmsRepository implements IFarmsRepository {
             row.id
         ));
     }
+
+    async findById(id: string): Promise<Farm | null> {
+        const result = await this.db("farms").where({ id }).first();
+        if (!result) return null;
+
+        return new Farm(
+            result.name,
+            result.city,
+            result.state,
+            result.total_area,
+            result.agricultural_area,
+            result.vegetation_area,
+            result.crops,
+            result.producer_id,
+            result.id
+        );
+    }
+
+    async update(id: string, farm: Partial<Farm>): Promise<void> {
+        await this.db("farms").where({ id }).update({
+            ...(farm.name && { name: farm.name }),
+            ...(farm.city && { city: farm.city }),
+            ...(farm.state && { state: farm.state }),
+            ...(farm.totalArea && { total_area: farm.totalArea }),
+            ...(farm.agriculturalArea && { agricultural_area: farm.agriculturalArea }),
+            ...(farm.vegetationArea && { vegetation_area: farm.vegetationArea }),
+            ...(farm.crops && { crops: farm.crops }),
+        });
+    }
 }

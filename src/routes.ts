@@ -5,6 +5,7 @@ import { getProducersController } from './useCases/GetProducers';
 import { updateProducerController } from './useCases/UpdateProducer';
 import { deleteProducerController } from './useCases/DeleteProducer';
 import { createFarmController } from './useCases/CreateFarm';
+import { updateFarmController } from './useCases/UpdateFarm';
 
 const router = Router();
 
@@ -30,6 +31,10 @@ router.delete('/producers/:id', (request, response) => {
 
 router.post("/farms", (request, response) => {
     return createFarmController.handle(request, response);
+});
+
+router.patch("/farms/:id", (request, response) => {
+    return updateFarmController.handle(request, response);
 });
 
 export { router };
