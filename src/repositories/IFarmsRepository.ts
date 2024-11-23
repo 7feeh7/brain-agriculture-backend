@@ -7,4 +7,5 @@ export interface IFarmsRepository {
     getTotalFarmsByProducerId(producerId: string): Promise<number>;
     getTotalAreaByProducerId(producerId: string): Promise<number>;
     getFarmsByStateByProducerId(producerId: string): Promise<any[]>;
+    getCropsDistributionByProducerId(producerId: string): Promise<any[]>;
 }

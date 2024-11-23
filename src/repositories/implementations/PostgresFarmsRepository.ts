@@ -96,4 +96,15 @@ export class PostgresFarmsRepository implements IFarmsRepository {
             .count("id as total")
             .groupBy("state");
     }
+
+    async getCropsDistributionByProducerId(producerId: string): Promise<{
+        crop: string;
+        total: number
+    }[]> {
+        return await this.db("farms")
+            .where({ producer_id: producerId })
+            .select(this.db.raw("unnest(crops) as crop"))
+            .count("id as total")
+            .groupBy("crop");
+    }
 }

@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { getTotalFarmsByProducerController } from "../useCases/GetTotalFarmsByProducer";
 import { getTotalAreaByProducerController } from "../useCases/GetTotalAreaByProducer";
 import { getFarmsByStateByProducerController } from "../useCases/GetFarmsByState";
+import { getCropsDistributionByProducerController } from "../useCases/GetCropsDistribution";
 
 const dashboardRouter = Router();
 
@@ -15,6 +16,10 @@ dashboardRouter.get("/:producerId/total-area", (request: Request, response: Resp
 
 dashboardRouter.get("/:producerId/farms-by-state", (request: Request, response: Response) => {
     getFarmsByStateByProducerController.handle(request, response);
+});
+
+dashboardRouter.get("/:producerId/crops-distribution", (request: Request, response: Response) => {
+    getCropsDistributionByProducerController.handle(request, response);
 });
 
 export { dashboardRouter };
