@@ -26,7 +26,10 @@ export class PostgresFarmsRepository implements IFarmsRepository {
     }
 
     async findByProducerId(producerId: string): Promise<Farm[]> {
-        const results = await this.db("farms").where({ producer_id: producerId }).select("*");
+        const results = await this.db("farms")
+            .where({ producer_id: producerId })
+            .select("*");
+
         return results.map((row) => new Farm(
             row.name,
             row.city,
