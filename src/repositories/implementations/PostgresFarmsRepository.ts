@@ -107,4 +107,21 @@ export class PostgresFarmsRepository implements IFarmsRepository {
             .count("id as total")
             .groupBy("crop");
     }
+
+    async getLandUsageByProducer(producerId: string): Promise<{
+        agricultural: number;
+        vegetation: number
+    }> {
+        const agriculturalResult = await this.db("farms")
+            .where({ producer_id: producerId })
+            .sum("agricultural_area as total");
+        const vegetationResult = await this.db("farms")
+            .where({ producer_id: producerId })
+            .sum("vegetation_area as total");
+
+        return {
+            agricultural: Number(agriculturalResult[0].total),
+            vegetation: Number(vegetationResult[0].total),
+        };
+    }
 }

@@ -3,6 +3,7 @@ import { getTotalFarmsByProducerController } from "../useCases/GetTotalFarmsByPr
 import { getTotalAreaByProducerController } from "../useCases/GetTotalAreaByProducer";
 import { getFarmsByStateByProducerController } from "../useCases/GetFarmsByState";
 import { getCropsDistributionByProducerController } from "../useCases/GetCropsDistribution";
+import { getLandUsageByProducerController } from "../useCases/GetLandUsage";
 
 const dashboardRouter = Router();
 
@@ -20,6 +21,10 @@ dashboardRouter.get("/:producerId/farms-by-state", (request: Request, response: 
 
 dashboardRouter.get("/:producerId/crops-distribution", (request: Request, response: Response) => {
     getCropsDistributionByProducerController.handle(request, response);
+});
+
+dashboardRouter.get("/:producerId/land-usage", (request: Request, response: Response) => {
+    getLandUsageByProducerController.handle(request, response);
 });
 
 export { dashboardRouter };
