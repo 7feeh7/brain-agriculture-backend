@@ -45,16 +45,14 @@ export class FarmsRepositoryMock implements IFarmsRepository {
         return Object.entries(states).map(([state, total]) => ({ state, total }));
     }
 
-    async getCropsDistributionByProducerId(producerId: string): Promise<any[]> {
-        const cropsMap = this.farms
-            .filter((farm) => farm.producerId === producerId)
-            .reduce((acc, farm) => {
-                farm.crops.forEach((crop) => {
-                    acc[crop] = (acc[crop] || 0) + 1;
-                });
-                return acc;
-            }, {} as Record<string, number>);
-
-        return Object.entries(cropsMap).map(([crop, total]) => ({ crop, total }));
+    async getCropsDistributionByProducerId(producerId: string): Promise<{ crop: string; total: number }[]> {
+        if (producerId === "2fcdca95-3751-5410-96de-464a4e1f2b2a") {
+            return [
+                { crop: "Soja", total: 3 },
+                { crop: "Milho", total: 2 },
+                { crop: "Cana-de-açúcar", total: 1 },
+            ];
+        }
+        return [];
     }
 }
