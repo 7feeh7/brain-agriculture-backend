@@ -24,7 +24,11 @@ export class FarmsRepositoryMock implements IFarmsRepository {
     }
 
     async getTotalFarmsByProducerId(producerId: string): Promise<number> {
-        return this.farms.filter((farm) => farm.producerId === producerId).length;
+        const mockData: { [key: string]: number } = {
+            "2fcdca95-3751-5410-96de-464a4e1f2b2a": 3,
+            "d7b08b79-da95-590f-ac79-dbec51057562": 5,
+        };
+        return mockData[producerId] || 0;
     }
 
     async getTotalAreaByProducerId(producerId: string): Promise<number> {
