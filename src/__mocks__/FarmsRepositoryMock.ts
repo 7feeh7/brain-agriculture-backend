@@ -1,7 +1,6 @@
 import { Farm } from "../entities/Farm";
 import { IFarmsRepository } from "../repositories/IFarmsRepository";
 
-
 export class FarmsRepositoryMock implements IFarmsRepository {
     private farms: Farm[] = [];
 
@@ -34,18 +33,24 @@ export class FarmsRepositoryMock implements IFarmsRepository {
             .reduce((total, farm) => total + farm.totalArea, 0);
     }
 
-    async getFarmsByStateByProducerId(producerId: string): Promise<any[]> {
-        const states = this.farms
-            .filter((farm) => farm.producerId === producerId)
-            .reduce((acc, farm) => {
-                acc[farm.state] = (acc[farm.state] || 0) + 1;
-                return acc;
-            }, {} as Record<string, number>);
-
-        return Object.entries(states).map(([state, total]) => ({ state, total }));
+    async getFarmsByStateByProducerId(producerId: string): Promise<{
+        state: string;
+        total: number
+    }[]> {
+        if (producerId === "2fcdca95-3751-5410-96de-464a4e1f2b2a") {
+            return [
+                { state: "SP", total: 3 },
+                { state: "MG", total: 2 },
+                { state: "PR", total: 1 },
+            ];
+        }
+        return [];
     }
 
-    async getCropsDistributionByProducerId(producerId: string): Promise<{ crop: string; total: number }[]> {
+    async getCropsDistributionByProducerId(producerId: string): Promise<{
+        crop: string;
+        total: number
+    }[]> {
         if (producerId === "2fcdca95-3751-5410-96de-464a4e1f2b2a") {
             return [
                 { crop: "Soja", total: 3 },
