@@ -60,4 +60,14 @@ export class FarmsRepositoryMock implements IFarmsRepository {
         }
         return [];
     }
+
+    async getLandUsageByProducer(producerId: string): Promise<{ agricultural: number; vegetation: number }> {
+        if (producerId === "2fcdca95-3751-5410-96de-464a4e1f2b2a") {
+            return {
+                agricultural: 150,
+                vegetation: 50,
+            };
+        }
+        return { agricultural: 0, vegetation: 0 };
+    }
 }
