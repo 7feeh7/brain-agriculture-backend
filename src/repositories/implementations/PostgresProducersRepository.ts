@@ -33,7 +33,6 @@ export class PostgresProducersRepository implements IProducersRepository {
     async update(producer: Producer): Promise<void> {
         await this.db("producers").where({ id: producer.id }).update({
             name: producer.name,
-            tax_identifier: producer.taxIdentifier
         });
     }
 

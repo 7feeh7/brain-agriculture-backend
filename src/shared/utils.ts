@@ -55,3 +55,7 @@ function validateCNPJ(cnpj: string): boolean {
 
     return checkDigits === `${firstCheckDigit}${secondCheckDigit}`;
 }
+
+export function sanitizeTaxIdentifier(taxIdentifier: string): string {
+    return taxIdentifier.replace(/\D/g, "");
+}

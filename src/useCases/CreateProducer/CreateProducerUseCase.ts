@@ -1,13 +1,15 @@
 import { Producer } from "../../entities/Producer ";
 import { IProducersRepository } from "../../repositories/IProducersRepository";
-import { validateTaxIdentifier } from "../../shared/utils";
+import { sanitizeTaxIdentifier, validateTaxIdentifier } from "../../shared/utils";
 import { ICreateProducerDTO } from "./CreateProducerDTO";
 
 export class CreateProducerUseCase {
     constructor(private producersRepository: IProducersRepository) { }
 
     async execute(data: ICreateProducerDTO) {
-        const { name, taxIdentifier } = data;
+        let { name, taxIdentifier } = data;
+
+        taxIdentifier = sanitizeTaxIdentifier(taxIdentifier);
 
         if (!validateTaxIdentifier(taxIdentifier)) {
             throw new Error("CPF ou CNPJ inválido.");
