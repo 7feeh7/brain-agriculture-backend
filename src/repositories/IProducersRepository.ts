@@ -6,4 +6,5 @@ export interface IProducersRepository {
     delete(id: string): Promise<void>;
     findById(id: string): Promise<Producer | null>;
     findAll(): Promise<Producer[]>;
+    findByTaxIdentifier(taxIdentifier: string): Promise<Producer | null>;
 }

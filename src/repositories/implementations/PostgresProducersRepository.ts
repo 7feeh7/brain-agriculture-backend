@@ -36,4 +36,8 @@ export class PostgresProducersRepository implements IProducersRepository {
             tax_identifier: producer.taxIdentifier
         });
     }
+
+    async findByTaxIdentifier(taxIdentifier: string): Promise<Producer | null> {
+        return await this.db("producers").where({ tax_identifier: taxIdentifier }).first() || null;
+    }
 }
