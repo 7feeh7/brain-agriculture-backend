@@ -4,10 +4,11 @@ import { getProducerByIdController } from "../useCases/GetProducerById";
 import { getProducersController } from "../useCases/GetProducers";
 import { updateProducerController } from "../useCases/UpdateProducer";
 import { deleteProducerController } from "../useCases/DeleteProducer";
+import { validateCreateProducer } from "../middlewares/validation/validateCreateProducer";
 
 const producersRouter = Router();
 
-producersRouter.post("/", (request: Request, response: Response) => {
+producersRouter.post("/", validateCreateProducer, (request: Request, response: Response) => {
     createProducerController.handle(request, response);
 });
 

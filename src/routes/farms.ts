@@ -1,10 +1,11 @@
 import { Router, Request, Response } from "express";
 import { createFarmController } from "../useCases/CreateFarm";
 import { updateFarmController } from "../useCases/UpdateFarm";
+import { validateCreateFarm } from "../middlewares/validation/validateCreateFarm";
 
 const farmsRouter = Router();
 
-farmsRouter.post("/", (request: Request, response: Response) => {
+farmsRouter.post("/", validateCreateFarm, (request: Request, response: Response) => {
     createFarmController.handle(request, response);
 });
 
