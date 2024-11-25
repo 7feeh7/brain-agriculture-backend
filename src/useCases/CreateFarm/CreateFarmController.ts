@@ -13,11 +13,11 @@ export class CreateFarmController {
             agriculturalArea,
             vegetationArea,
             crops,
-            producerId
+            producerId,
         } = request.body;
 
         try {
-            await this.createFarmUseCase.execute({
+            const createdFarm = await this.createFarmUseCase.execute({
                 name,
                 city,
                 state,
@@ -27,9 +27,12 @@ export class CreateFarmController {
                 crops,
                 producerId,
             });
-            return response.status(201).send();
+
+            return response.status(201).json(createdFarm);
         } catch (err) {
-            return response.status(400).json({ message: (err as Error).message });
+            return response.status(400).json({
+                message: (err as Error).message || 'Unexpected error.'
+            });
         }
     }
 }

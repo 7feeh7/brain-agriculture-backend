@@ -11,18 +11,32 @@ export class PostgresFarmsRepository implements IFarmsRepository {
         this.db = database.getKnex();
     }
 
-    async save(farm: Farm): Promise<void> {
-        await this.db("farms").insert({
-            id: farm.id,
-            name: farm.name,
-            city: farm.city,
-            state: farm.state,
-            total_area: farm.totalArea,
-            agricultural_area: farm.agriculturalArea,
-            vegetation_area: farm.vegetationArea,
-            crops: farm.crops,
-            producer_id: farm.producerId,
-        });
+    async save(farm: Farm): Promise<Farm> {
+        const [createdFarm] = await this.db("farms")
+            .insert({
+                id: farm.id,
+                name: farm.name,
+                city: farm.city,
+                state: farm.state,
+                total_area: farm.totalArea,
+                agricultural_area: farm.agriculturalArea,
+                vegetation_area: farm.vegetationArea,
+                crops: farm.crops,
+                producer_id: farm.producerId,
+            })
+            .returning([
+                "id",
+                "name",
+                "city",
+                "state",
+                "total_area as totalArea",
+                "agricultural_area as agriculturalArea",
+                "vegetation_area as vegetationArea",
+                "crops",
+                "producer_id as producerId",
+            ]);
+
+        return createdFarm;
     }
 
     async findByProducerId(producerId: string): Promise<Farm[]> {

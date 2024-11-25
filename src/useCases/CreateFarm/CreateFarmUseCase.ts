@@ -5,7 +5,7 @@ import { ICreateFarmDTO } from "./CreateFarmDTO";
 export class CreateFarmUseCase {
     constructor(private farmsRepository: IFarmsRepository) { }
 
-    async execute(data: ICreateFarmDTO): Promise<void> {
+    async execute(data: ICreateFarmDTO): Promise<Farm> {
         const { totalArea, agriculturalArea, vegetationArea } = data;
 
         if (agriculturalArea + vegetationArea > totalArea) {
@@ -23,6 +23,6 @@ export class CreateFarmUseCase {
             data.producerId
         );
 
-        await this.farmsRepository.save(farm);
+        return await this.farmsRepository.save(farm);
     }
 }
