@@ -148,4 +148,4 @@ Rode as migrações para criar as tabelas no banco:
     yarn test:coverage
   ```
 # Documentação
-Para mais detalhes sobre as rotas do projeto, [clique aqui.]()
+Para mais detalhes sobre as rotas do projeto, [clique aqui.](https://documenter.getpostman.com/view/15611768/2sAYBUEt4g)
