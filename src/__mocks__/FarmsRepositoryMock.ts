@@ -4,8 +4,9 @@ import { IFarmsRepository } from "../repositories/IFarmsRepository";
 export class FarmsRepositoryMock implements IFarmsRepository {
     private farms: Farm[] = [];
 
-    async save(farm: Farm): Promise<void> {
+    async save(farm: Farm): Promise<Farm> {
         this.farms.push(farm);
+        return farm;
     }
 
     async findByProducerId(producerId: string): Promise<Farm[]> {

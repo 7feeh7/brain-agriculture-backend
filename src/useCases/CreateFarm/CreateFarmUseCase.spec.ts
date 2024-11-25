@@ -10,7 +10,7 @@ describe("CreateFarmUseCase", () => {
         createFarmUseCase = new CreateFarmUseCase(farmsRepositoryMock);
     });
 
-    it("deve criar uma fazenda com sucesso quando os dados forem válidos.", async () => {
+    it("deve criar uma fazenda com sucesso e retornar a fazenda criada.", async () => {
         const farmData = {
             name: "Fazenda Teste",
             city: "Cidade Teste",
@@ -22,7 +22,9 @@ describe("CreateFarmUseCase", () => {
             producerId: "83a126ea-ee70-53d7-9a24-aeedd2bc1ae2",
         };
 
-        await createFarmUseCase.execute(farmData);
+        const createdFarm = await createFarmUseCase.execute(farmData);
+
+        expect(createdFarm).toMatchObject(farmData);
 
         const farms = await farmsRepositoryMock.findByProducerId("83a126ea-ee70-53d7-9a24-aeedd2bc1ae2");
         expect(farms).toHaveLength(1);
